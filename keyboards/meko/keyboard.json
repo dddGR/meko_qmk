@@ -17,6 +17,7 @@
         "console": true,
         "encoder": true,
         "oled": true,
+        "caps_word": true,
         "pointing_device": true
     },
     "encoder": {
@@ -42,6 +43,10 @@
         {"key": "SCRL_TO"},
         {"key": "SCRL_IN"}
     ],
+    "caps_word": {
+        "both_shifts_turns_on": true,
+        "invert_on_shift": true
+    },
     "layouts": {
         "LAYOUT": {
             "layout": [
