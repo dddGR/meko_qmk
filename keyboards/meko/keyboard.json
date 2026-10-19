@@ -1,0 +1,113 @@
+{
+    "keyboard_name": "meko",
+    "manufacturer": "ddd",
+    "url": "https://www.github.com/dddGR/meko",
+    "maintainer": "dddGR",
+    "board": "GENERIC_RP_RP2040",
+    "bootloader": "rp2040",
+    "processor": "RP2040",
+    "usb": {
+        "vid": "0xDEAF",
+        "pid": "0x0913",
+        "device_version": "1.0.0"
+    },
+    "features": {
+        "mousekey": true,
+        "extrakey": true,
+        "console": true,
+        "encoder": true,
+        "oled": true,
+        "pointing_device": true
+    },
+    "encoder": {
+        "rotary": [
+            {"pin_a": "GP18", "pin_b": "GP15", "resolution": 1},
+            {"pin_a": "GP18", "pin_b": "GP16", "resolution": 1},
+            {"pin_a": "GP16", "pin_b": "GP15", "resolution": 1},
+            {"pin_a": "GP29", "pin_b": "GP28" },
+            {"pin_a": "GP4", "pin_b": "GP3"}
+        ]
+    },
+    "diode_direction": "COL2ROW",
+    "matrix_pins": {
+        "cols": ["GP20", "GP21", "GP22", "GP23", "GP24", "GP25", "GP7", "GP8", "GP9", "GP10", "GP11", "GP12"],
+        "rows": ["GP27", "GP26", "GP14", "GP13", "GP6", "GP5"]
+    },
+    "keycodes":[
+        {"key": "CPI_SW"},
+        {"key": "SCRL_SW"},
+        {"key": "ROT_R15"},
+        {"key": "ROT_L15"},
+        {"key": "SCRL_MO"},
+        {"key": "SCRL_TO"},
+        {"key": "SCRL_IN"}
+    ],
+    "layouts": {
+        "LAYOUT": {
+            "layout": [
+                // LEFT SIDE
+                {"matrix": [0, 0], "x": 0, "y": 0},
+                {"matrix": [0, 1], "x": 1, "y": 0},
+                {"matrix": [0, 2], "x": 2, "y": 0},
+                {"matrix": [0, 3], "x": 3, "y": 0},
+                {"matrix": [0, 4], "x": 4, "y": 0},
+                {"matrix": [1, 5], "x": 5, "y": 0},
+
+                {"matrix": [0, 5], "x": 6, "y": 0}, // encoder
+                
+                {"matrix": [1, 0], "x": 0, "y": 1},
+                {"matrix": [1, 1], "x": 1, "y": 1},
+                {"matrix": [1, 2], "x": 2, "y": 1},
+                {"matrix": [1, 3], "x": 3, "y": 1},
+                {"matrix": [1, 4], "x": 4, "y": 1},
+                {"matrix": [2, 5], "x": 5, "y": 1},
+                
+                {"matrix": [2, 0], "x": 0, "y": 2},
+                {"matrix": [2, 1], "x": 1, "y": 2},
+                {"matrix": [2, 2], "x": 2, "y": 2},
+                {"matrix": [2, 3], "x": 3, "y": 2},
+                {"matrix": [2, 4], "x": 4, "y": 2},
+                {"matrix": [3, 0], "x": 5, "y": 2},
+                
+                {"matrix": [3, 5], "x": 6, "y": 2},
+
+                {"matrix": [3, 1], "x": 3, "y": 3},
+                {"matrix": [3, 2], "x": 4, "y": 3},
+                {"matrix": [3, 4], "x": 5, "y": 3},
+                {"matrix": [3, 3], "x": 6, "y": 3},
+
+                // RIGHT SIDE
+                {"matrix": [5, 6], "x": 8, "y": 0}, // encoder
+                
+                {"matrix": [4, 6], "x": 9, "y": 0},
+                {"matrix": [5, 7], "x": 10, "y": 0},
+                {"matrix": [5, 8], "x": 11, "y": 0},
+                {"matrix": [5, 9], "x": 12, "y": 0},
+                {"matrix": [5, 10], "x": 13, "y": 0},
+                {"matrix": [5, 11], "x": 14, "y": 0},
+
+                {"matrix": [3, 6], "x": 9, "y": 1},
+                {"matrix": [4, 7], "x": 10, "y": 1},
+                {"matrix": [4, 8], "x": 11, "y": 1},
+                {"matrix": [4, 9], "x": 12, "y": 1},
+                {"matrix": [4, 10], "x": 13, "y": 1},
+                {"matrix": [4, 11], "x": 14, "y": 1},
+                
+                {"matrix": [2, 6], "x": 8, "y": 2},
+
+                {"matrix": [2, 11], "x": 9, "y": 2},
+                {"matrix": [3, 7], "x": 10, "y": 2},
+                {"matrix": [3, 8], "x": 11, "y": 2},
+                {"matrix": [3, 9], "x": 12, "y": 2},
+                {"matrix": [3, 10], "x": 13, "y": 2},
+                {"matrix": [3, 11], "x": 14, "y": 2},
+
+                {"matrix": [2, 8], "x": 8, "y": 3},
+                {"matrix": [2, 7], "x": 9, "y": 3},
+                {"matrix": [2, 10], "x": 11, "y": 3},
+                {"matrix": [2, 9], "x": 10, "y": 3}
+            ]
+        }
+    }
+}
+
