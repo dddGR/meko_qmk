@@ -53,5 +53,10 @@
             "fileMatch": ["keymap.json"],
             "url": "./data/schemas/keymap.jsonschema"
         }
-    ]
+    ],
+    "better-todo-tree.filtering.ignoreGitSubmodules": true,
+    "better-todo-tree.filtering.includedWorkspaces": [
+        "keyboards/meko/*"
+    ],
+    "better-todo-tree.regex.regex": "(^|//|#|<!--|;|/\\*|^[ \\t]*(-|\\d+.))\\s*(?=\\[x\\]|\\[ \\]|[A-Za-z0-9_])(?!XXX(?![A-Za-z0-9_]))($TAGS)(?![A-Za-z0-9_])"
 }
