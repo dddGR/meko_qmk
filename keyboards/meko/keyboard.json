@@ -18,6 +18,11 @@
         "encoder": true,
         "oled": true,
         "caps_word": true,
+        "tap_dance": true,
+        "key_override": true,
+        "combo": true,
+        "auto_shift": true,
+        "layer_lock": true,
         "pointing_device": true
     },
     "encoder": {
@@ -34,17 +39,18 @@
         "cols": ["GP20", "GP21", "GP22", "GP23", "GP24", "GP25", "GP7", "GP8", "GP9", "GP10", "GP11", "GP12"],
         "rows": ["GP27", "GP26", "GP14", "GP13", "GP6", "GP5"]
     },
-    "keycodes":[
-        {"key": "CPI_SW"},
-        {"key": "SCRL_SW"},
-        {"key": "ROT_R15"},
-        {"key": "ROT_L15"},
-        {"key": "SCRL_MO"},
-        {"key": "SCRL_TO"},
-        {"key": "SCRL_IN"}
-    ],
+    // "keycodes":[
+    //     {"key": "CPI_SW"},
+    //     {"key": "SCRL_SW"},
+    //     {"key": "ROT_R15"},
+    //     {"key": "ROT_L15"},
+    //     {"key": "SCRL_MO"},
+    //     {"key": "SCRL_TO"},
+    //     {"key": "SCRL_IN"}
+    // ],
     "caps_word": {
         "both_shifts_turns_on": true,
+        "double_tap_shift_turns_on": true,
         "invert_on_shift": true
     },
     "layouts": {

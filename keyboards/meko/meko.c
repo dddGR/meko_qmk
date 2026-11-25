@@ -41,7 +41,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #ifndef MEKO_ROTATION_ANGLE
-#    define MEKO_ROTATION_ANGLE {0, -60, -45, -30, -15, 0, 15, 30, 45, 60} // FIXME
+#    define MEKO_ROTATION_ANGLE {-60, -45, -30, -15, 0, 15, 30, 45, 60}
 #endif
 #ifndef MEKO_ROTATION_DEFAULT
 #    define MEKO_ROTATION_DEFAULT (4)
@@ -56,8 +56,8 @@ int8_t        angle_array[]    = MEKO_ROTATION_ANGLE;
 #define ANGLE_SIZE (sizeof(angle_array) / sizeof(int8_t))
 
 // Trackball State
-bool     BurstState  = false; // init burst state for Trackball module
-uint16_t MotionStart = 0;     // Timer for accel, 0 is resting state
+// bool     BurstState  = false; // init burst state for Trackball module
+// uint16_t MotionStart = 0;     // Timer for accel, 0 is resting state
 
 void pointing_device_init_kb(void) {
     // set the CPI.
@@ -71,18 +71,20 @@ report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
     static float y_accumulator = 0.0;
     static float prev_x = 0.0, prev_y = 0.0;
 
-    float sensitivity            = 0.5; // Movement sensitivity
+    float sensitivity            = 0.6; // Movement sensitivity
     float smoothing_factor       = 0.7; // Smoothing factor
-    float sensitivity_multiplier = 1.5; // Sensitivity adjustment multiplier
+    float sensitivity_multiplier = 1.0; // Sensitivity adjustment multiplier
 
-    // Apply rotation angle adjustment
-    double rad       = (double)angle_array[meko_config.rotation_angle] * (M_PI / 180) * -1;
-    float  rotated_x = mouse_report.x * cos(rad) - mouse_report.y * sin(rad);
-    float  rotated_y = mouse_report.x * sin(rad) + mouse_report.y * cos(rad);
-
+    // TODO: not using rotation angle for now
+    // // Apply rotation angle adjustment
+    // double rad       = (double)angle_array[meko_config.rotation_angle] * (M_PI / 180) * -1;
+    // float  rotated_x = mouse_report.x * cos(rad) - mouse_report.y * sin(rad);
+    // float  rotated_y = mouse_report.x * sin(rad) + mouse_report.y * cos(rad);
     // Apply smoothing to the rotated values
-    float smoothed_x = prev_x * smoothing_factor + rotated_x * (1.0 - smoothing_factor);
-    float smoothed_y = prev_y * smoothing_factor + rotated_y * (1.0 - smoothing_factor);
+    // float smoothed_x = prev_x * smoothing_factor + rotated_x * (1.0 - smoothing_factor);
+    // float smoothed_y = prev_y * smoothing_factor + rotated_y * (1.0 - smoothing_factor);
+    float smoothed_x = prev_x * smoothing_factor + (float)mouse_report.x * (1.0 - smoothing_factor);
+    float smoothed_y = prev_y * smoothing_factor + (float)mouse_report.y * (1.0 - smoothing_factor);
     prev_x           = smoothed_x;
     prev_y           = smoothed_y;
 
@@ -155,39 +157,39 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 
-    if (keycode == CPI_SW && record->event.pressed) {
-        meko_config.cpi_idx = (meko_config.cpi_idx + 1) % CPI_OPTION_SIZE;
-        eeconfig_update_kb(meko_config.raw);
-        pointing_device_set_cpi(cpi_array[meko_config.cpi_idx]);
-    }
+    // if (keycode == CPI_SW && record->event.pressed) {
+    //     meko_config.cpi_idx = (meko_config.cpi_idx + 1) % CPI_OPTION_SIZE;
+    //     eeconfig_update_kb(meko_config.raw);
+    //     pointing_device_set_cpi(cpi_array[meko_config.cpi_idx]);
+    // }
 
-    if (keycode == SCRL_SW && record->event.pressed) {
-        meko_config.scrl_div = (meko_config.scrl_div + 1) % SCRL_DIV_SIZE;
-        eeconfig_update_kb(meko_config.raw);
-    }
+    // if (keycode == SCRL_SW && record->event.pressed) {
+    //     meko_config.scrl_div = (meko_config.scrl_div + 1) % SCRL_DIV_SIZE;
+    //     eeconfig_update_kb(meko_config.raw);
+    // }
 
-    if (keycode == ROT_R15 && record->event.pressed) {
-        meko_config.rotation_angle = (meko_config.rotation_angle + 1) % ANGLE_SIZE;
-        eeconfig_update_kb(meko_config.raw);
-    }
+    // if (keycode == ROT_R15 && record->event.pressed) {
+    //     meko_config.rotation_angle = (meko_config.rotation_angle + 1) % ANGLE_SIZE;
+    //     eeconfig_update_kb(meko_config.raw);
+    // }
 
-    if (keycode == ROT_L15 && record->event.pressed) {
-        meko_config.rotation_angle = (ANGLE_SIZE + meko_config.rotation_angle - 1) % ANGLE_SIZE;
-        eeconfig_update_kb(meko_config.raw);
-    }
+    // if (keycode == ROT_L15 && record->event.pressed) {
+    //     meko_config.rotation_angle = (ANGLE_SIZE + meko_config.rotation_angle - 1) % ANGLE_SIZE;
+    //     eeconfig_update_kb(meko_config.raw);
+    // }
 
-    if (keycode == SCRL_IN && record->event.pressed) {
-        meko_config.scrl_inv = -meko_config.scrl_inv;
-        eeconfig_update_kb(meko_config.raw);
-    }
+    // if (keycode == SCRL_IN && record->event.pressed) {
+    //     meko_config.scrl_inv = -meko_config.scrl_inv;
+    //     eeconfig_update_kb(meko_config.raw);
+    // }
 
-    if (keycode == SCRL_TO && record->event.pressed) {
-        meko_config.scrl_mode ^= 1;
-    }
+    // if (keycode == SCRL_TO && record->event.pressed) {
+    //     meko_config.scrl_mode ^= 1;
+    // }
 
-    if (keycode == SCRL_MO) {
-        meko_config.scrl_mode ^= 1;
-    }
+    // if (keycode == SCRL_MO) {
+    //     meko_config.scrl_mode ^= 1;
+    // }
 
     return true;
 }
@@ -258,22 +260,16 @@ void oled_write_layer_state(void) {
             oled_write_P(PSTR("Base "), false);
             break;
         case 1:
-            oled_write_P(PSTR("Lower"), false);
+            oled_write_P(PSTR("Symbl"), false);
             break;
         case 2:
-            oled_write_P(PSTR("Raise"), false);
+            oled_write_P(PSTR("Utils"), false);
             break;
         case 3:
-            oled_write_P(PSTR("Mouse"), false);
+            oled_write_P(PSTR("Nav  "), false);
             break;
         case 4:
-            oled_write_P(PSTR("L4   "), false);
-            break;
-        case 5:
-            oled_write_P(PSTR("L5   "), false);
-            break;
-        case 6:
-            oled_write_P(PSTR("L6   "), false);
+            oled_write_P(PSTR("Sys  "), false);
             break;
         default:
             oled_write_P(PSTR("Undef"), false);
